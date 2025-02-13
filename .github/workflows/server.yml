@@ -2,49 +2,49 @@ name: CI/CD Pipeline
 
 on: 
   push:
-   branches:
-     - main
-     - develop
-  pull_request:
     branches:
-     - main
-     - develop
+      - main
+      - develop
+  pull_request: 
+    branches:
+      - main
+      - develop
 
 jobs:
   build-and-test:
     runs-on: ubuntu-latest
 
     steps:
-     - name: Checkout Repository 
-       uses: actions/checkout@v3
+      - name: Checkout Repository 
+        uses: actions/checkout@v3
 
-     - name: Setup Node.js
-       uses: actions/setup-node@v4
-       with:
-        node-version: 18
-        cache: "npm"
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 18
+          cache: "npm"
 
-     - name: Install Dependencies
-       run: npm install
+      - name: Install Dependencies
+        run: npm install
 
-     - name: Run Linting
-       run: npm run lint
+      - name: Run Linting
+        run: npm run lint
 
-     - name: Run Unit Tests
-       run: npm run test
+      - name: Run Unit Tests
+        run: npm run test
 
-     - name: Build Project
-       run: npm run build  
+      - name: Build Project
+        run: npm run build  
 
-deploy:
-  needs: build-and-test
-  runs-on: ubuntu-latest
-  if: github.ref == 'refs/heads/main'
+  deploy:
+    needs: build-and-test
+    runs-on: ubuntu-latest
+    if: github.ref == 'refs/heads/main'
 
-  steps:
-   - name: Checkout Repository
-     uses: actions/checkout@v3
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v3
 
-   - name: Deploy to Production
-     run: |
-        echo "Deploying to production..."  
+      - name: Deploy to Production
+        run: |
+          echo "Deploying to production..."
