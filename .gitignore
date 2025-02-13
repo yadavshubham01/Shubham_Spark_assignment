@@ -1,0 +1,55 @@
+# Node.js dependencies
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+package-lock.json
+yarn.lock
+
+# TypeScript build files
+dist/
+build/
+*.tsbuildinfo
+
+# Environment variables
+.env
+.env.local
+.env.development
+.env.test
+.env.production
+
+# Logs
+logs/
+*.log
+log
+npm-debug.log
+yarn-debug.log
+yarn-error.log
+pnpm-debug.log
+lerna-debug.log
+.npmrc
+.out/
+
+# IDE and Editor files
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# MongoDB database files
+/data/db/
+dump/
+
+# Redis files
+dump.rdb
+*.aof
+
+# Docker files
+.dockerignore
+docker-compose.override.yml
+
+# Debugging and misc
+.DS_Store
+Thumbs.db
+*.bak
+*.orig

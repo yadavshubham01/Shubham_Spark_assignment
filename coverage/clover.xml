@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<coverage generated="1739388095098" clover="3.2.0">
+  <project timestamp="1739388095098" name="All files">
+    <metrics statements="38" coveredstatements="27" conditionals="7" coveredconditionals="4" methods="6" coveredmethods="2" elements="51" coveredelements="33" complexity="0" loc="38" ncloc="38" packages="4" files="5" classes="5"/>
+    <package name="config">
+      <metrics statements="12" coveredstatements="12" conditionals="6" coveredconditionals="4" methods="2" coveredmethods="1"/>
+      <file name="queue.ts" path="C:\Users\Anshul yadav\Desktop\Web3\spark\backend\src\config\queue.ts">
+        <metrics statements="4" coveredstatements="4" conditionals="4" coveredconditionals="2" methods="0" coveredmethods="0"/>
+        <line num="1" count="1" type="stmt"/>
+        <line num="2" count="1" type="stmt"/>
+        <line num="5" count="1" type="stmt"/>
+        <line num="7" count="1" type="stmt"/>
+      </file>
+      <file name="redis.ts" path="C:\Users\Anshul yadav\Desktop\Web3\spark\backend\src\config\redis.ts">
+        <metrics statements="8" coveredstatements="8" conditionals="2" coveredconditionals="2" methods="2" coveredmethods="1"/>
+        <line num="1" count="1" type="stmt"/>
+        <line num="2" count="1" type="stmt"/>
+        <line num="3" count="1" type="stmt"/>
+        <line num="6" count="1" type="stmt"/>
+        <line num="8" count="1" type="cond" truecount="2" falsecount="0"/>
+        <line num="10" count="1" type="stmt"/>
+        <line num="11" count="1" type="stmt"/>
+        <line num="13" count="1" type="stmt"/>
+      </file>
+    </package>
+    <package name="models">
+      <metrics statements="5" coveredstatements="5" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
+      <file name="schema.ts" path="C:\Users\Anshul yadav\Desktop\Web3\spark\backend\src\models\schema.ts">
+        <metrics statements="5" coveredstatements="5" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
+        <line num="1" count="1" type="stmt"/>
+        <line num="2" count="1" type="stmt"/>
+        <line num="15" count="1" type="stmt"/>
+        <line num="29" count="1" type="stmt"/>
+        <line num="31" count="1" type="stmt"/>
+      </file>
+    </package>
+    <package name="services">
+      <metrics statements="19" coveredstatements="8" conditionals="1" coveredconditionals="0" methods="4" coveredmethods="1"/>
+      <file name="broadcast.service.ts" path="C:\Users\Anshul yadav\Desktop\Web3\spark\backend\src\services\broadcast.service.ts">
+        <metrics statements="19" coveredstatements="8" conditionals="1" coveredconditionals="0" methods="4" coveredmethods="1"/>
+        <line num="1" count="1" type="stmt"/>
+        <line num="2" count="1" type="stmt"/>
+        <line num="3" count="1" type="stmt"/>
+        <line num="5" count="1" type="stmt"/>
+        <line num="7" count="1" type="stmt"/>
+        <line num="10" count="1" type="stmt"/>
+        <line num="11" count="1" type="stmt"/>
+        <line num="13" count="1" type="stmt"/>
+        <line num="18" count="0" type="stmt"/>
+        <line num="22" count="0" type="stmt"/>
+        <line num="26" count="0" type="stmt"/>
+        <line num="27" count="0" type="cond" truecount="0" falsecount="1"/>
+        <line num="28" count="0" type="stmt"/>
+        <line num="31" count="0" type="stmt"/>
+        <line num="33" count="0" type="stmt"/>
+        <line num="34" count="0" type="stmt"/>
+        <line num="38" count="0" type="stmt"/>
+        <line num="43" count="0" type="stmt"/>
+        <line num="44" count="0" type="stmt"/>
+      </file>
+    </package>
+    <package name="utils">
+      <metrics statements="2" coveredstatements="2" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
+      <file name="logger.ts" path="C:\Users\Anshul yadav\Desktop\Web3\spark\backend\src\utils\logger.ts">
+        <metrics statements="2" coveredstatements="2" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
+        <line num="1" count="1" type="stmt"/>
+        <line num="3" count="1" type="stmt"/>
+      </file>
+    </package>
+  </project>
+</coverage>
