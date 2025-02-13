@@ -59,32 +59,22 @@ POST /api/broadcasts
 }
 ```
 **Response:**
-```json
-{
-  "message": "Broadcast created successfully",
-  "broadcast": { ... }
-}
-```
+
 
 #### **Get Active Broadcasts**
 ```http
-GET /api/broadcasts
+GET /api/broadcasts/bulk
 ```
 
----
+**Response:**
+
 
 ## ⚙️ CI/CD & Deployment
 ### **Automated GitHub Actions**
 - Runs tests on every push.
 - Deploys to production on **main** branch.
 
-### **Deploy with Docker**
-```sh
-docker build -t meetup-broadcast .
-docker run -p 5000:5000 meetup-broadcast
-```
 
----
 
 ## 🤝 Contributing
 1. Fork the repository.
@@ -92,6 +82,3 @@ docker run -p 5000:5000 meetup-broadcast
 3. Commit changes: `git commit -m "Add new feature"`
 4. Push: `git push origin feature-name`
 5. Open a **Pull Request** 🎉
-```
-
----
