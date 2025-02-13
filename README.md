@@ -59,7 +59,7 @@ POST /api/broadcasts
 }
 ```
 **Response:**
-
+<img src='./images/create.png' alt='Broadcast API'>
 
 #### **Get Active Broadcasts**
 ```http
@@ -67,7 +67,33 @@ GET /api/broadcasts/bulk
 ```
 
 **Response:**
+<img src='./images/bulk.png' alt='Broadcast API'>
 
+
+#### **Search Broadcasts**
+```http
+GET /api/broadcasts
+```
+
+**Response:**
+<img src='./images/search.png' alt='Broadcast API'>
+
+
+#### **GET Broadcasts BY ID**
+```http
+GET /api/broadcasts/{id}
+```
+
+**Response:**
+<img src='./images/Idone.png' alt='Broadcast API'>
+
+#### **Join Broadcasts BY ID**
+```http
+POST /api/broadcasts/{id}/join
+```
+
+**Response:**
+<img src='./images/join.png' alt='Broadcast API'>
 
 ## ⚙️ CI/CD & Deployment
 ### **Automated GitHub Actions**

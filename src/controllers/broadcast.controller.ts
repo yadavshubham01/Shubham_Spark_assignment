@@ -47,9 +47,9 @@ export class BroadcastController {
 
           if(search){
             query.$or = [
-                { title : {$regex: search , $option: "i"}},
-                { description : {$regex: search , $option: "i"}},
-                { location : {$regex: search , $option: "i"}}
+                { title : {$regex: search , $options: "i"}},
+                { description : {$regex: search , $options: "i"}},
+                { location : {$regex: search , $options: "i"}}
             ];
           }
 
