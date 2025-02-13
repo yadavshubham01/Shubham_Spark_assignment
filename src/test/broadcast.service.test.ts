@@ -1,13 +1,14 @@
 import { BroadcastService } from "../services/broadcast.service";
 import { Broadcast } from "../models/schema";
 
-jest.mock("../src/models/schema");
+jest.mock("../models/schema");
 
 describe("Broadcast Service", () => {
   it("should create a new broadcast", async () => {
     const mockBroadcast = {
       title: "Tech Meetup",
       description: "Discussing AI trends",
+      hostId: "1234",
       location: "Downtown Cafe",
       expiresAt: new Date(Date.now() + 3600000),
     };

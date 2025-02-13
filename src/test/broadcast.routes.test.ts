@@ -2,7 +2,7 @@ import request from "supertest";
 import app from "../server";
 import { Broadcast } from "../models/schema";
 
-jest.mock("../src/models/schema");
+jest.mock("../models/schema");
 
 describe("Broadcast API Endpoints", () => {
   it("should create a new broadcast", async () => {
@@ -20,7 +20,8 @@ describe("Broadcast API Endpoints", () => {
   });
 
   it("should get all active broadcasts", async () => {
-    const response = await request(app).get("/api/broadcasts");
+    const response = await request(app).get("/api/broadcasts/bulk");
     expect(response.status).toBe(200);
   });
+
 });
