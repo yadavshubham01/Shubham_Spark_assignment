@@ -54,6 +54,7 @@ POST /api/broadcasts
 {
   "title": "Tech Meetup",
   "description": "Discussing AI",
+  "hostId":"12334",
   "location": "Downtown Cafe",
   "expiresAt": "2025-02-20T15:00:00Z"
 }
