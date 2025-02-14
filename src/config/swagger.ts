@@ -20,8 +20,22 @@ const swaggerOptions = {
         description: "Local Development Server",
       },
     ],
+    components: {
+      securitySchemes : {
+        BearerAuth:{
+          type: "http",
+          scheme: "bearer",
+          bearerFormat: "JWT"
+        }  
+      },
+    },
+    security: [
+      {
+        BearerAuth: [],
+      },
+    ],
   },
-  apis: ["./src/routes/*.ts"], 
+  apis: ["./src/routes/*.ts"],
 };
 
 const swaggerDocs = swaggerJsDoc(swaggerOptions);

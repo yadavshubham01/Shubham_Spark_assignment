@@ -1,6 +1,8 @@
 import { Router } from "express";
 import { BroadcastController } from "../controllers/broadcast.controller";
 import { broadcastLimiter } from "../middleware/rateLimiter";
+import { JoinRequestController } from "../controllers/JoinRequestController";
+import authMiddleware from "../middleware/auth.middleware";
 
 const router = Router();
 
@@ -10,7 +12,8 @@ const router = Router();
  *   post:
  *     summary: Create a new broadcast
  *     description: Users can create a spontaneous meetup broadcast.
- *     
+ *     security:
+ *       - BearerAuth: []  
  *     requestBody:
  *       required: true
  *       content:
@@ -24,9 +27,6 @@ const router = Router();
  *               description:
  *                 type: string
  *                 example: "Discussing new tech trends"
- *               hostId:
- *                 type: string
- *                 example: "1232"
  *               location:
  *                 type: string
  *                 example: "Downtown Cafe"
@@ -39,9 +39,10 @@ const router = Router();
  *         description: Broadcast created successfully
  *       400:
  *         description: Bad request (validation error)
+ *       401:
+ *         description: Unauthorized (Missing or invalid token)
  */
-
-router.post("/",broadcastLimiter, BroadcastController.create);
+router.post("/", broadcastLimiter, authMiddleware, BroadcastController.create);
 
 /**
  * @swagger
@@ -71,7 +72,6 @@ router.get("/bulk", BroadcastController.getAll);
  *         description: Broadcast not found
  */
 router.get("/:id", BroadcastController.get);
-
 
 /**
  * @swagger
@@ -124,22 +124,121 @@ router.get("/:id", BroadcastController.get);
  *       500:
  *         description: Internal server error
  */
-router.get("/" , BroadcastController.getAllBySearch);
+router.get("/", BroadcastController.getAllBySearch);
+
+/**
+ * @swagger
+ * /api/broadcasts/{id}:
+ *   put:
+ *     summary: Update a broadcast
+ *     parameters:
+ *       - in: path
+ *         name: id
+ *         required: true
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             properties:
+ *               title:
+ *                 type: string
+ *               description:
+ *                 type: string
+ *               location:
+ *                 type: string
+ *     responses:
+ *       200:
+ *         description: Broadcast updated
+ *       403:
+ *         description: Not authorized
+ */
+router.put("/:id", authMiddleware, BroadcastController.update);
+
+/**
+ * @swagger
+ * /api/broadcasts/{id}:
+ *   delete:
+ *     summary: Delete a broadcast
+ *     parameters:
+ *       - in: path
+ *         name: id
+ *         required: true
+ *     responses:
+ *       200:
+ *         description: Broadcast deleted
+ *       403:
+ *         description: Not authorized
+ */
+router.delete("/:id", authMiddleware, BroadcastController.delete);
 
 /**
  * @swagger
  * /api/broadcasts/{id}/join:
  *   post:
- *     summary: Join a broadcast
+ *     summary: Request to join a broadcast
+ *     description: A user requests to join a specific broadcast.
  *     parameters:
  *       - in: path
  *         name: id
  *         required: true
- *         description: The ID of the broadcast to join
+ *         description: The ID of the broadcast to join.
+ *         schema:
+ *           type: string
+ *     security:
+ *       - BearerAuth: []  
+ *     responses:
+ *       201:
+ *         description: Successfully requested to join the broadcast.
+ *       400:
+ *         description: Bad request (e.g., missing user ID).
+ *       500:
+ *         description: Internal server error.
+ */
+router.post("/:id/join", authMiddleware, JoinRequestController.requestJoin);
+
+/**
+ * @swagger
+ * /api/broadcasts/{broadcastId}/join/{userId}:
+ *   patch:
+ *     summary: Approve or reject a join request
+ *     description: Updates the status of a join request (approved/rejected).
+ *     security:
+ *       - BearerAuth: []  
+ *     parameters:
+ *       - in: path
+ *         name: broadcastId
+ *         required: true
+ *         description: The ID of the broadcast.
+ *         schema:
+ *           type: string
+ *       - in: path
+ *         name: userId
+ *         required: true
+ *         description: The ID of the user whose request is being updated.
+ *         schema:
+ *           type: string
+ *     requestBody: 
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             properties:
+ *               status:
+ *                 type: string
+ *                 enum: [approved, rejected]
  *     responses:
  *       200:
- *         description: Successfully joined the broadcast
+ *         description: Successfully updated the join request.
+ *       400:
+ *         description: Invalid request (e.g., missing status).
+ *       404:
+ *         description: Join request not found.
+ *       500:
+ *         description: Internal server error.
  */
-router.post("/:id/join", BroadcastController.join);
+router.patch("/:broadcastId/join/:userId", authMiddleware, JoinRequestController.handleRequest);
 
 export default router;

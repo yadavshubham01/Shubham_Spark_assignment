@@ -4,13 +4,20 @@ import { BroadcastService } from "../services/broadcast.service";
 import { logger } from "../utils/logger";
 import { Request, Response } from "express";
 import RedisClient from "../config/redis";
+import { error } from "console";
 
 
 export class BroadcastController {
-    static async create(req: Request, res: Response){
+    static async create(req: Request, res: Response): Promise<any>{
         try{
-            const { title ,description,hostId, location,expiresAt } =req.body;
-            const broadcast= await BroadcastService.createBroadcast({ title, description, hostId ,location, expiresAt});
+            const { title ,description, location,expiresAt } =req.body;
+            
+            const hostId = req.user?.userId; 
+            if (!hostId) {
+              return res.status(401).json({ message: "Unauthorized: No user ID found" });
+            }
+            const expiryDate = expiresAt ? new Date(expiresAt) : undefined;
+            const broadcast= await BroadcastService.createBroadcast({ title, description,hostId,location, expiresAt});
             res.status(201).json(broadcast);
         }catch (error: any){
             logger.error("Error creating broadcast:" , error.message);
@@ -76,15 +83,27 @@ export class BroadcastController {
         }
     }
 
-    static async join(req: Request, res: Response) : Promise<any>{
-        try {
-          const { userId } = req.body;
-          const updatedBroadcast = await BroadcastService.joinBroadcast(req.params.id, userId);
-          if (!updatedBroadcast) return res.status(404).json({ message: "Broadcast not found" });
-          res.json(updatedBroadcast);
-        } catch (error) {
-          logger.error("Error joining broadcast:", error);
-          res.status(500).json({ message: "Internal server error" });
-        }
+    static async update(req:Request ,res:Response) :Promise<any>{
+      try{
+        const {id} =req.params;
+        const updatedBroadcast=await BroadcastService.getUpdateBroadcast(id,req.body);
+        
+        if(!updatedBroadcast) return res.status(404).json({error: "Broadcast is not found"});
+
+        res.json(updatedBroadcast);
+      }catch(error){
+        res.status(500).json({error:"Internal Server Error"});
+      }
+    }
+    
+    static async delete(req: Request, res: Response):Promise<any> {
+      try {
+        const { id } = req.params;
+        const deletedBroadcast = await BroadcastService.getdeleteBroadcast(id);
+        if (!deletedBroadcast) return res.status(404).json({ error: "Broadcast not found" });
+        res.json({ message: "Broadcast deleted successfully" });
+      } catch (error) {
+        res.status(500).json({ error: "Internal Server Error" });
+      }
     }
 }
